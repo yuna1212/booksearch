@@ -1,5 +1,6 @@
 package com.searcher.booksearch;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,9 @@ public class ScanBarcode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_barcode_activity);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         barcodeScan = new IntentIntegrator(this);
         barcodeScan.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
