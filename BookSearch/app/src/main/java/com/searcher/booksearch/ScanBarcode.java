@@ -24,7 +24,12 @@ public class ScanBarcode extends AppCompatActivity {
         actionBar.hide();
 
         barcodeScan = new IntentIntegrator(this);
-        barcodeScan.setOrientationLocked(false); // default가 세로모드인데 휴대폰 방향에 따라 가로, 세로로 자동 변경됩니다.
+        // 휴대폰 방향에 따라 가로, 세로로 자동 변경
+        barcodeScan.setOrientationLocked(false);
+        //바코드 스캔 호출 시 보이는 텍스트
+        barcodeScan.setPrompt("도서 뒷면의 바코드를 사각형 안에 비춰주세요.");
+        //바코드 인식 시 소리 나지 않도록
+        barcodeScan.setBeepEnabled(false);
         barcodeScan.initiateScan();
     }
 
