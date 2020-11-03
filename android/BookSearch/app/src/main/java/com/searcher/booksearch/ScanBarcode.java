@@ -81,11 +81,17 @@ public class ScanBarcode extends AppCompatActivity {
                         elements_content.get(i).text());
             }
 
-            for(int i = 0; i < reviews.length; i++) {
-                // 확인용 출력
-                //System.out.println(reviews[i].id + "\t" + reviews[i].date + "\n" + reviews[i].comment);
-                //System.out.println("------------------------------------------------------------------");
-                all_reviews += (reviews[i].id + "    " + reviews[i].date + "\n" + reviews[i].comment + "\n\n");
+            if(reviews.length != 0) {    // 리뷰가 있을 경우
+                for(int i = 0; i < reviews.length; i++) {
+                    // 확인용 출력
+                    //System.out.println(reviews[i].id + "\t" + reviews[i].date + "\n" + reviews[i].comment);
+                    //System.out.println("------------------------------------------------------------------");
+                    all_reviews += (reviews[i].id + "    " + reviews[i].date + "\n" + reviews[i].comment + "\n\n");
+                }
+            }
+
+            else {      // 리뷰가 없을 경우
+                all_reviews = "리뷰 없음";
             }
 
             // 텍스트뷰 id 매핑
