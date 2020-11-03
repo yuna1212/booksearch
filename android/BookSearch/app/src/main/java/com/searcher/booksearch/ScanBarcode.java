@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -94,7 +95,7 @@ public class ScanBarcode extends AppCompatActivity {
             }
 
             // 텍스트뷰 id 매핑
-            textView = (TextView)findViewById(R.id.bookReviews);
+            textView = (TextView)findViewById(R.id.book_reviews);
             // 텍스트 set
             textView.setText(all_reviews);
             textView.setMovementMethod(new ScrollingMovementMethod());
@@ -116,7 +117,7 @@ public class ScanBarcode extends AppCompatActivity {
                 // 웹뷰 실행시키고 리뷰 크롤링
                 String url = "http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=" + ISBN + "&orderClick=LEa&Kc=";
                 System.out.println(url);
-                webView = findViewById(R.id.searchWebsite);
+                webView = findViewById(R.id.search_website);
                 webView.getSettings().setJavaScriptEnabled(true);
                 webView.loadUrl(url); //웹뷰 실행
                 webView.setWebChromeClient(new WebChromeClient()); // 웹뷰에 크롬 사용 허용, 이 부분이 없으면 크롬에서 alert 뜨지 않음
