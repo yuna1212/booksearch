@@ -26,6 +26,7 @@
         </activity>
         <activity android:name="com.searcher.booksearch.Login" />
         <activity android:name="com.searcher.booksearch.SelectMenu"></activity>
+        <activity android:name="com.searcher.booksearch.MyBookList"></activity>
     </application>
 
 </manifest>
