@@ -78,13 +78,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/bookTitle"
+                        android:id="@+id/bookTitle1"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:gravity="center_horizontal|center_vertical"
                         android:padding="1dp"
                         android:text="책제목"
-                        android:textSize="20sp"
+                        android:textSize="21sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -95,7 +95,7 @@
                         android:padding="5dp">
 
                         <ImageView
-                            android:id="@+id/book_cover"
+                            android:id="@+id/bookCover1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -109,35 +109,47 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/bookAuthor"
+                                android:id="@+id/bookAuthor1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:text=" 저자 :"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:paddingRight="2dp"
+                                android:paddingBottom="2dp"
+                                android:text="저자 :"
                                 android:textSize="15sp" />
 
                             <TextView
-                                android:id="@+id/bookPublisher"
+                                android:id="@+id/bookPublisher1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:text=" 출판사 :"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:paddingRight="2dp"
+                                android:paddingBottom="2dp"
+                                android:text="출판사 :"
                                 android:textSize="15sp" />
 
                             <TextView
-                                android:id="@+id/bookPublishedDate"
+                                android:id="@+id/bookPublishedDate1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:text=" 출간일 :"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:paddingRight="2dp"
+                                android:paddingBottom="2dp"
+                                android:text="출간일 :"
                                 android:textSize="15sp" />
 
                             <TextView
-                                android:id="@+id/bookPrice"
+                                android:id="@+id/bookPrice1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:text=" 가격 :"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="2dp"
+                                android:paddingRight="2dp"
+                                android:paddingBottom="2dp"
+                                android:text="가격 :"
                                 android:textSize="15sp" />
 
                             <LinearLayout
@@ -193,7 +205,7 @@
                         android:textStyle="bold" />
 
                     <View
-                        android:id="@+id/view2"
+                        android:id="@+id/view1"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="#768C5E"
@@ -241,7 +253,7 @@
                     </LinearLayout>
 
                     <View
-                        android:id="@+id/view"
+                        android:id="@+id/view2"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="#768C5E"
