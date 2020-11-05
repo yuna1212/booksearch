@@ -268,7 +268,10 @@
                         android:paddingRight="5dp"
                         android:paddingBottom="10dp"
                         android:scrollbarFadeDuration="0"
-                        android:text="로딩중..." />
+                        android:scrollbarStyle="insideInset"
+                        android:scrollbars="vertical"
+                        android:text="로딩중..."
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
