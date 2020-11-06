@@ -37,7 +37,7 @@ public class ScanBarcode extends AppCompatActivity {
         // 바코드 스캔
         IntentIntegrator barcodeScan = new IntentIntegrator(this);
         barcodeScan.setOrientationLocked(false);    // 휴대폰 방향에 따라 가로, 세로로 자동 변경
-        barcodeScan.setPrompt("도서 뒷면의 바코드를 사각형 안에 비춰주세요");  //바코드 안의 텍스트 설정
+        barcodeScan.setPrompt("도서 뒷면의 바코드를 사각형 안에 비춰주세요.");  //바코드 안의 텍스트 설정
         barcodeScan.setBeepEnabled(false);  //바코드 인식시 소리 여부
         barcodeScan.initiateScan();
 
@@ -61,7 +61,8 @@ public class ScanBarcode extends AppCompatActivity {
 
                 // 해당 도서가 데이터베이스에 존재하는지 검사
                 if (manageDatabase.isDataExist(ISBN)) {     // 존재할 경우
-                    Toast.makeText(context, "내 관심 도서 목록에 해당 도서가 존재합니다.", Toast.LENGTH_LONG).show();
+                    manageDatabase.deleteData(ISBN);    // 데이터베이스에서 해당 도서 삭제
+                    Toast.makeText(context, "내 관심 도서 목록에서 삭제되었습니다.", Toast.LENGTH_LONG).show();
                 }
 
                 else {      // 존재하지 않을 경우
