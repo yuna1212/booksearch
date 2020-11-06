@@ -64,7 +64,7 @@ public class CrawlingReviews {
             List<Element> elements_id = doc.select(".simple_review_info").select("strong"); // 작성자 id
             List<Element> elements_date = doc.select(".simple_review_info").select("span"); // 작성 날짜
 
-            // 리뷰 객체에 크롤링한 리뷰 저장
+            // reviews 객체에 크롤링한 리뷰 저장
             reviews = new Review[elements_id.size()];
 
             for(int i = 0; i < reviews.length; i++) {
@@ -73,11 +73,16 @@ public class CrawlingReviews {
                         elements_content.get(i).text());
             }
 
-            for(int i = 0; i < reviews.length; i++) {
-                // 확인용 출력
-                // System.out.println(reviews[i].id + "\t" + reviews[i].date + "\n" + reviews[i].comment + "\n");
+            if(reviews.length != 0) {    // 리뷰가 있을 경우
+                for(int i = 0; i < reviews.length; i++) {
+                    // 확인용 출력
+                    //System.out.println(reviews[i].id + "\t" + reviews[i].date + "\n" + reviews[i].comment + "\n");
+                    all_reviews += (reviews[i].id + "    " + reviews[i].date + "\n" + reviews[i].comment + "\n\n");
+                }
+            }
 
-                all_reviews += (reviews[i].id + "    " + reviews[i].date + "\n" + reviews[i].comment + "\n\n");
+            else {      // 리뷰가 없을 경우
+                all_reviews = "리뷰 없음";
             }
 
             textView.setText(all_reviews);  // 텍스트 set
