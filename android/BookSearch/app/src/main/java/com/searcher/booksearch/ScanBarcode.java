@@ -10,12 +10,15 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import org.searcher.booksearch.R;
+
+import java.util.concurrent.ExecutionException;
 
 public class ScanBarcode extends AppCompatActivity {
 
@@ -83,11 +86,41 @@ public class ScanBarcode extends AppCompatActivity {
             } else {
                 ISBN = result.getContents();    // 바코드 스캔 결과값을 ISBN 변수에 저장
 
+                // 네이버 API 요청, 도서 상세 페이지 쓰기
+                try {
+                    BookInformation book = new BookInformation(ISBN);
+
+                    // 책 정보 작성할 컴포넌트 찾기
+                    TextView bookTitle = findViewById(R.id.bookTitle1);
+                    TextView bookAuthor1 = findViewById(R.id.bookAuthor1);
+                    TextView bookPublisher1 = findViewById(R.id.bookPublisher1);
+                    TextView bookPublishedDate1 = findViewById(R.id.bookPublishedDate1);
+                    TextView bookPrice1 = findViewById(R.id.bookPrice1);
+                    TextView bookIntroContent = findViewById(R.id.bookIntroContent);
+                    ImageView bookCover1 = findViewById(R.id.bookCover1);
+
+                    // 책 정보 컴포넌트에 작성
+                    book.set_title_on_component(bookTitle);
+                    book.set_author_on_component(bookAuthor1);
+                    book.set_publisher_on_component(bookPublisher1);
+                    book.set_pubdate_on_component(bookPublishedDate1);
+                    book.set_price_on_component(bookPrice1);
+                    book.set_description_on_component(bookIntroContent);
+                    book.set_image_on_component(bookCover1);
+
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
                 // 리뷰 크롤링
                 WebView search_webView = findViewById(R.id.searchWebsite);
                 TextView review_textView = findViewById(R.id.bookReviews);
                 CrawlingReviews reviews = new CrawlingReviews(search_webView, review_textView);
                 reviews.runCrawling(ISBN);
+
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
