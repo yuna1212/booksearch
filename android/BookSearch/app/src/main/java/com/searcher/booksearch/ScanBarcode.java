@@ -51,7 +51,7 @@ public class ScanBarcode extends AppCompatActivity {
         if(result != null) {
             if(result.getContents() == null) {  // 취소 누른 경우 메뉴 선택 페이지로 이동
                 Intent intent = new Intent(getApplicationContext(), SelectMenu.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             } else {
                 ISBN = result.getContents();    // 바코드 스캔 결과값을 ISBN 변수에 저장
