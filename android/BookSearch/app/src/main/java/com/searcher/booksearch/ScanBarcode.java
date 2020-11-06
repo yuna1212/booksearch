@@ -16,9 +16,6 @@ public class ScanBarcode extends AppCompatActivity {
 
     public static final int REQUEST_CODE_GO_TO_MY_BOOK_LIST = 105;
 
-    private IntentIntegrator barcodeScan;
-    private WebView search_webView;
-    private TextView review_textView;
     private String ISBN;
 
     @Override
@@ -30,11 +27,8 @@ public class ScanBarcode extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        search_webView = findViewById(R.id.searchWebsite);
-        review_textView = findViewById(R.id.bookReviews);
-
         // 바코드 스캔
-        barcodeScan = new IntentIntegrator(this);
+        IntentIntegrator barcodeScan = new IntentIntegrator(this);
         barcodeScan.setOrientationLocked(false);    // 휴대폰 방향에 따라 가로, 세로로 자동 변경
         barcodeScan.setPrompt("도서 뒷면의 바코드를 사각형 안에 비춰주세요");  //바코드 안의 텍스트 설정
         barcodeScan.setBeepEnabled(false);  //바코드 인식시 소리 여부
@@ -63,6 +57,8 @@ public class ScanBarcode extends AppCompatActivity {
                 ISBN = result.getContents();    // 바코드 스캔 결과값을 ISBN 변수에 저장
 
                 // 리뷰 크롤링
+                WebView search_webView = findViewById(R.id.searchWebsite);
+                TextView review_textView = findViewById(R.id.bookReviews);
                 CrawlingReviews reviews = new CrawlingReviews(search_webView, review_textView);
                 reviews.runCrawling(ISBN);
             }
