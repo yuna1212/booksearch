@@ -32,7 +32,7 @@ public class SelectMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ScanBarcode.class); //관심 도서.class연결
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_바코드로_도서찾기); //REQUEST_CODE_관심도서
             }
         });
