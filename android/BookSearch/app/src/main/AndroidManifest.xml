@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.searcher.booksearch.Login" />
+        <activity android:name="com.searcher.booksearch.Login"></activity>
         <activity android:name="com.searcher.booksearch.SelectMenu"></activity>
         <activity android:name="com.searcher.booksearch.MyBookList"></activity>
     </application>
