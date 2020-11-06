@@ -2,12 +2,17 @@ package com.searcher.booksearch;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import org.searcher.booksearch.R;
@@ -17,11 +22,13 @@ public class ScanBarcode extends AppCompatActivity {
     public static final int REQUEST_CODE_GO_TO_MY_BOOK_LIST = 105;
 
     private String ISBN;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_result_activity);
+        context = this;
 
         // 액션바 숨김
         ActionBar actionBar = getSupportActionBar();
@@ -42,6 +49,25 @@ public class ScanBarcode extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MyBookList.class); //관심 도서.class연결
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_GO_TO_MY_BOOK_LIST); //REQUEST_CODE_관심도서
+            }
+        });
+
+        // 내 관심 도서 목록에 해당 도서 추가하는 button
+        ImageButton addToListButton = (ImageButton) findViewById(R.id.addToListButton);
+        addToListButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ManageDatabase manageDatabase = new ManageDatabase(context);
+
+                // 해당 도서가 데이터베이스에 존재하는지 검사
+                if (manageDatabase.isDataExist(ISBN)) {     // 존재할 경우
+                    Toast.makeText(context, "내 관심 도서 목록에 해당 도서가 존재합니다.", Toast.LENGTH_LONG).show();
+                }
+
+                else {      // 존재하지 않을 경우
+                    manageDatabase.insertData(ISBN);    // 데이터베이스에 해당 도서 추가
+                    Toast.makeText(context, "내 관심 도서 목록에 추가되었습니다.", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
