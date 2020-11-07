@@ -172,8 +172,10 @@
                                     <Button
                                         android:id="@+id/goToListButton"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="내 관심 도서 목록"
+                                        android:layout_height="36dp"
+                                        android:background="@drawable/booklist_button"
+                                        android:text="   내 관심 도서 목록   "
+                                        android:textColor="#FFFFFF"
                                         android:textSize="13sp" />
 
                                     <Space
@@ -181,11 +183,11 @@
                                         android:layout_height="match_parent"
                                         android:layout_weight="5" />
 
-                                    <ImageButton
+                                    <Button
                                         android:id="@+id/addToListButton"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="45dp"
-                                        app:srcCompat="@mipmap/ic_launcher" />
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/heart_drawable" />
 
                                 </LinearLayout>
                             </LinearLayout>

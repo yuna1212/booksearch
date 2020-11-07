@@ -8,8 +8,9 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="180dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/recipekorea"
         android:gravity="center_horizontal|center_vertical"
         android:text="Book\nSearch"
         android:textColor="#768C5E"

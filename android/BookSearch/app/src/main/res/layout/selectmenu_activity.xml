@@ -12,6 +12,7 @@
         android:layout_height="140dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="Book\nSearch"
+        android:fontFamily="@font/recipekorea"
         android:textColor="#768C5E"
         android:textSize="40sp"
         android:textStyle="bold"

@@ -25,13 +25,12 @@ public class ScanBarcode extends AppCompatActivity {
     public static final int REQUEST_CODE_GO_TO_MY_BOOK_LIST = 105;
 
     private String ISBN;
-    Context context;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_result_activity);
-        context = this;
 
         // 액션바 숨김
         ActionBar actionBar = getSupportActionBar();
@@ -56,7 +55,7 @@ public class ScanBarcode extends AppCompatActivity {
         });
 
         // 내 관심 도서 목록에 해당 도서 추가하는 button
-        ImageButton addToListButton = (ImageButton) findViewById(R.id.addToListButton);
+        final Button addToListButton = (Button) findViewById(R.id.addToListButton);
         addToListButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -65,18 +64,26 @@ public class ScanBarcode extends AppCompatActivity {
                 // 해당 도서가 데이터베이스에 존재하는지 검사
                 if (manageDatabase.isDataExist(ISBN)) {     // 존재할 경우
                     manageDatabase.deleteData(ISBN);    // 데이터베이스에서 해당 도서 삭제
+                    // 빈 하트로 설정
+                    addToListButton.setBackgroundResource(R.drawable.empty_heart);
+
                     Toast.makeText(context, "내 관심 도서 목록에서 삭제되었습니다.", Toast.LENGTH_LONG).show();
                 }
 
                 else {      // 존재하지 않을 경우
                     manageDatabase.insertData(ISBN);    // 데이터베이스에 해당 도서 추가
+                    // 채워진 하트 설정
+                    addToListButton.setBackgroundResource(R.drawable.full_heart);
+
                     Toast.makeText(context, "내 관심 도서 목록에 추가되었습니다.", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Button addToListButton = (Button) findViewById(R.id.addToListButton);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {  // 취소 누른 경우 메뉴 선택 페이지로 이동
@@ -86,8 +93,18 @@ public class ScanBarcode extends AppCompatActivity {
             } else {
                 ISBN = result.getContents();    // 바코드 스캔 결과값을 ISBN 변수에 저장
 
+                // 해당 도서가 데이터베이스에 존재하는지 검사
+                ManageDatabase manageDatabase = new ManageDatabase(context);
+
+                if (manageDatabase.isDataExist(ISBN)) {     // 존재할 경우, 채워진 하트
+                    addToListButton.setBackgroundResource(R.drawable.full_heart);
+                }
+                else {      // 존재하지 않을 경우, 빈 하트
+                    addToListButton.setBackgroundResource(R.drawable.empty_heart);
+                }
+
                 // 네이버 API 요청, 도서 상세 페이지 쓰기
-                try {
+               try {
                     BookInformation book = new BookInformation(ISBN);
 
                     // 책 정보 작성할 컴포넌트 찾기
