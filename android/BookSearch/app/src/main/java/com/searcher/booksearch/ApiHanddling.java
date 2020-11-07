@@ -86,15 +86,18 @@ public class ApiHanddling{
 
             xpp.next();
             int eventType = xpp.getEventType();
-            Log.d(TAG, "get_withTag: xpp 이벤트 타입은");
-            Log.d(TAG, String.valueOf(eventType));
 
+            int item_count = 0; // 도서 여러 개인 경우 첫번째 항목만 적용시키기 위함
             while (eventType != XmlPullParser.END_DOCUMENT) {
+                if(item_count == 2) // 첫번째 item은 Naver 헤더, 두번째부터 도서
+                    break;
 
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
                         tag = xpp.getName(); //태그 이름 얻어오기
-                        if (tag.equals("item")) ;
+                        if (tag.equals("item")){
+                            item_count++;
+                        }
                         else if (request_tags.contains(tag)) {
                             xpp.next();
                             ret.put(tag, xpp.getText());
