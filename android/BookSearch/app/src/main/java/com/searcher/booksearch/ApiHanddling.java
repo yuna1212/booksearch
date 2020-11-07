@@ -135,9 +135,9 @@ public class ApiHanddling{
         // 출간일 구분자 추가
         StringBuffer pubdate = new StringBuffer();
         pubdate.append(book_info.get("pubdate").substring(0, 4));
-        pubdate.append("-");
+        pubdate.append(".");
         pubdate.append(book_info.get("pubdate").substring(4, 6));
-        pubdate.append("-");
+        pubdate.append(".");
         pubdate.append(book_info.get("pubdate").substring(6, 8));
 
         return pubdate.toString();
