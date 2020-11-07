@@ -69,7 +69,7 @@ public class MyBookList extends AppCompatActivity {
                         // 데이터베이스에서 delete
                         ManageDatabase manageDatabase = new ManageDatabase(context);
                         manageDatabase.deleteData(item.getISBN());
-                        Toast.makeText(context, "삭제 완료", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "삭제 완료", Toast.LENGTH_SHORT).show();
 
                         // 리싸이클러뷰에서 삭제
                         adapter.removeItem(recyclerView, position);

@@ -67,7 +67,7 @@ public class ScanBarcode extends AppCompatActivity {
                     // 빈 하트로 설정
                     addToListButton.setBackgroundResource(R.drawable.empty_heart);
 
-                    Toast.makeText(context, "내 관심 도서 목록에서 삭제되었습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "내 관심 도서 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 }
 
                 else {      // 존재하지 않을 경우
@@ -75,7 +75,7 @@ public class ScanBarcode extends AppCompatActivity {
                     // 채워진 하트 설정
                     addToListButton.setBackgroundResource(R.drawable.full_heart);
 
-                    Toast.makeText(context, "내 관심 도서 목록에 추가되었습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "내 관심 도서 목록에 추가되었습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
