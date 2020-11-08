@@ -131,6 +131,17 @@ public class ScanBarcode extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                // 책 소개 자세히를 눌렀다면 책 상세 페이지 팝업창 띄우기
+                 TextView bookInfoDetail = findViewById(R.id.bookInfoDetail);
+                bookInfoDetail.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), bookinfo_more_activity.class);
+                        intent.putExtra("url", "www.naver.com"); // 우선 네이버 링크를 보내둠
+                        startActivity(intent);
+                    }
+                });
+
 
                 // 리뷰 크롤링
                 WebView search_webView = findViewById(R.id.searchWebsite);
