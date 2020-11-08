@@ -50,7 +50,7 @@ public class ApiHanddling{
         this.isbn = isbn;
 
         // 찾을 태그 정하기
-        String[] arr = {"title", "author", "image", "publisher", "pubdate", "price", "description"};
+        String[] arr = {"title", "author", "image", "publisher", "pubdate", "price", "description", "link"};
         this.tags = arr;
 
         // api 요청하고 결과 저장: sub thread에서 작업해야함..!
@@ -152,6 +152,9 @@ public class ApiHanddling{
 
     public String get_description(){
         return book_info.get("description");
+    }
+    public String get_detailLink(){
+        return book_info.get("link");
     }
 }
 
