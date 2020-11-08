@@ -105,7 +105,7 @@ public class ScanBarcode extends AppCompatActivity {
 
                 // 네이버 API 요청, 도서 상세 페이지 쓰기
                try {
-                    BookInformation book = new BookInformation(ISBN);
+                    final BookInformation book = new BookInformation(ISBN); // final로 쓰는게 맞나...
 
                     // 책 정보 작성할 컴포넌트 찾기
                     TextView bookTitle = findViewById(R.id.bookTitle1);
@@ -125,22 +125,25 @@ public class ScanBarcode extends AppCompatActivity {
                     book.set_description_on_component(bookIntroContent);
                     book.set_image_on_component(bookCover1);
 
+                   // 책 소개 자세히를 눌렀다면 책 상세 페이지 팝업창 띄우기
+                   // 이렇게 try catch에 다 넣어놔도 되나 모르겠다
+                   TextView bookInfoDetail = findViewById(R.id.bookInfoDetail);
+                   bookInfoDetail.setOnClickListener(new View.OnClickListener(){
+                       @Override
+                       public void onClick(View v) {
+                           Intent intent = new Intent(getApplicationContext(), bookinfo_more_activity.class);
+                           intent.putExtra("url", book.get_detailContents()); // 우선 상세 페이지 링크를 보내둠
+                           startActivity(intent);
+                       }
+                   });
+
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                // 책 소개 자세히를 눌렀다면 책 상세 페이지 팝업창 띄우기
-                 TextView bookInfoDetail = findViewById(R.id.bookInfoDetail);
-                bookInfoDetail.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), bookinfo_more_activity.class);
-                        intent.putExtra("url", "www.naver.com"); // 우선 네이버 링크를 보내둠
-                        startActivity(intent);
-                    }
-                });
+
 
 
                 // 리뷰 크롤링

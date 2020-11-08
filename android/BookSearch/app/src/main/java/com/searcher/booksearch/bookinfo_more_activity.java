@@ -30,7 +30,6 @@ public class bookinfo_more_activity extends Activity {
         close_button.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
