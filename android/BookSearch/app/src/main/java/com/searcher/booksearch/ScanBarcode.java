@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -149,6 +150,7 @@ public class ScanBarcode extends AppCompatActivity {
                 // 리뷰 크롤링
                 WebView search_webView = findViewById(R.id.searchWebsite);
                 TextView review_textView = findViewById(R.id.bookReviews);
+                review_textView.setMovementMethod(new ScrollingMovementMethod());
                 CrawlingReviews reviews = new CrawlingReviews(search_webView, review_textView);
                 reviews.runCrawling(ISBN);
 
