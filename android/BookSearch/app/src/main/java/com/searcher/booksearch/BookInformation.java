@@ -66,4 +66,9 @@ public class BookInformation {
         textView.append(this.api.get_description());
     }
 
+    // 나중에 상세 내용 String으로 반환하는 코드로 수정
+    public String get_detailContents(){
+        return api.get_detailLink();
+    }
+
 }
