@@ -74,7 +74,8 @@ public class ManageDatabase {
         openDatabase();  // 데이터베이스 열기
 
         String sql = "UPDATE " + MyBookListContract.MyBookListEntry.TABLE_NAME +
-                " SET " + "memo = '" + memo + "' WHERE ISBN = '" + ISBN + "'";
+                " SET " + MyBookListContract.MyBookListEntry.COLUMN_MEMO + " = '" + memo +
+                "' WHERE " + MyBookListContract.MyBookListEntry.COLUMN_ISBN + " = '" + ISBN + "'";
 
         database.execSQL(sql);  // 쿼리 실행
         database.close();   // 데이터베이스 닫기
@@ -86,7 +87,7 @@ public class ManageDatabase {
         openDatabase();  // 데이터베이스 열기
 
         String sql = "DELETE FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME
-                + " WHERE " + "ISBN = '" + ISBN + "'";
+                + " WHERE " + MyBookListContract.MyBookListEntry.COLUMN_ISBN + " = '" + ISBN + "'";
 
         database.execSQL(sql);  // 쿼리 실행
         database.close();   // 데이터베이스 닫기
@@ -97,8 +98,9 @@ public class ManageDatabase {
     public Cursor getAllData() {
         openDatabase();  // 데이터베이스 열기
 
-        String sql = "SELECT ISBN, memo FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME +
-                " ORDER BY addDate DESC";
+        String sql = "SELECT " + MyBookListContract.MyBookListEntry.COLUMN_ISBN + ", " + MyBookListContract.MyBookListEntry.COLUMN_MEMO +
+                " FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME +
+                " ORDER BY " + MyBookListContract.MyBookListEntry.COLUMN_ADDDATE + " DESC";
 
         Cursor cursor = database.rawQuery(sql);  // 쿼리 실행
         database.close();   // 데이터베이스 닫기
@@ -108,12 +110,14 @@ public class ManageDatabase {
     }
 
     /// 도서명, 저자에 검색어가 포함되어 있는 행 반환
-    public Cursor searchData(String searchTerm) {
+    public Cursor searchData(String search_term) {
         openDatabase();  // 데이터베이스 열기
 
-        String sql = "SELECT ISBN, memo FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME +
-                " WHERE title LIKE '%" + searchTerm + "%' OR author LIKE '%" + searchTerm +
-                "%' ORDER BY addDate DESC";
+        String sql = "SELECT " + MyBookListContract.MyBookListEntry.COLUMN_ISBN + ", " + MyBookListContract.MyBookListEntry.COLUMN_MEMO +
+                " FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME +
+                " WHERE " + MyBookListContract.MyBookListEntry.COLUMN_TITLE + " LIKE '%" + search_term +
+                "%' OR " + MyBookListContract.MyBookListEntry.COLUMN_AUTHOR + " LIKE '%" + search_term +
+                "%' ORDER BY " + MyBookListContract.MyBookListEntry.COLUMN_ADDDATE + " DESC";
 
         Cursor cursor = database.rawQuery(sql);  // 쿼리 실행
         database.close();   // 데이터베이스 닫기
@@ -127,8 +131,9 @@ public class ManageDatabase {
         boolean exist;
         openDatabase();  // 데이터베이스 열기
 
-        String sql = "SELECT ISBN FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME
-                + " WHERE ISBN = '" + ISBN + "'";
+        String sql = "SELECT " + MyBookListContract.MyBookListEntry.COLUMN_ISBN +
+                " FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME
+                + " WHERE " + MyBookListContract.MyBookListEntry.COLUMN_ISBN + " = '" + ISBN + "'";
 
         Cursor cursor = database.rawQuery(sql);  // 쿼리 실행
 
