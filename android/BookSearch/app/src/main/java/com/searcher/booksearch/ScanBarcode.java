@@ -27,6 +27,8 @@ public class ScanBarcode extends AppCompatActivity {
     public static final int REQUEST_CODE_GO_TO_MY_BOOK_LIST = 105;
 
     private String ISBN;
+    private String title;
+    private String author;
     Context context = this;
 
     @Override
@@ -73,7 +75,7 @@ public class ScanBarcode extends AppCompatActivity {
                 }
 
                 else {      // 존재하지 않을 경우
-                    manageDatabase.insertData(ISBN);    // 데이터베이스에 해당 도서 추가
+                    manageDatabase.insertData(ISBN, title, author);    // 데이터베이스에 해당 도서 추가
                     // 채워진 하트 설정
                     addToListButton.setBackgroundResource(R.drawable.full_heart);
 
@@ -126,6 +128,10 @@ public class ScanBarcode extends AppCompatActivity {
                     book.set_price_on_component(bookPrice1);
                     book.set_description_on_component(bookIntroContent);
                     book.set_image_on_component(bookCover1);
+
+                   // 내 관심 도서 목록에 추가할 때 데이터베이스에 저장해야 되는 내용들 변수에 저장
+                   title = book.getBookInfo().get("title");
+                   author = book.getBookInfo().get("author");
 
                    // 책 소개 자세히를 눌렀다면 책 상세 페이지 팝업창 띄우기
                    // 이렇게 try catch에 다 넣어놔도 되나 모르겠다

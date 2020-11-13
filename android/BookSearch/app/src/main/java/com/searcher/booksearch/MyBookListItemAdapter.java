@@ -59,10 +59,18 @@ public class MyBookListItemAdapter extends RecyclerView.Adapter<MyBookListItemAd
     public int getItemCount() {
         return items.size();
     }
-    public void addItem(MyBookListItem item) { items.add(item); }
-    public void setItems(ArrayList<MyBookListItem> items) { this.items = items; }
-    public MyBookListItem getItem(int position) { return items.get(position); }
-    public void setItem(int position, MyBookListItem item) { items.set(position, item); }
+
+    public void addItem(MyBookListItem item) {
+        items.add(item);
+    }
+
+    public void removeItems() {
+        items.clear();
+    }
+
+    public MyBookListItem getItem(int position) {
+        return items.get(position);
+    }
 
     // 항목 삭제
     public void removeItem(RecyclerView recyclerView, int position) {
