@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -132,8 +133,20 @@ public class ScanBarcode extends AppCompatActivity {
                    bookInfoDetail.setOnClickListener(new View.OnClickListener(){
                        @Override
                        public void onClick(View v) {
+                           // 교보문고 책 상세 설명 크롤링 해옴
+                           GetDetailedDescAsyncTask detail_asynctask = new GetDetailedDescAsyncTask();
+                           String detail_info  = null;
+                           try {
+                               detail_info = detail_asynctask.execute("http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=" + ISBN + "&orderClick=LEa&Kc=").get();
+                           } catch (ExecutionException e) {
+                               e.printStackTrace();
+                           } catch (InterruptedException e) {
+                               e.printStackTrace();
+                           }
+
+                           // 상세 설명 인텐트에 넣어서 팝업창에 보내기
                            Intent intent = new Intent(getApplicationContext(), bookinfo_more_activity.class);
-                           intent.putExtra("url", book.get_detailContents()); // 우선 상세 페이지 링크를 보내둠
+                           intent.putExtra("description", detail_info);
                            startActivity(intent);
                        }
                    });

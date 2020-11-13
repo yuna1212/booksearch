@@ -24,7 +24,7 @@ public class bookinfo_more_activity extends Activity {
         // 내용 직성
         Intent intent = getIntent();
         TextView textView = findViewById(R.id.book_detail);
-        textView.setText(intent.getStringExtra("url"));
+        textView.setText(intent.getStringExtra("description"));
 
         Button close_button = findViewById(R.id.close_button);
         close_button.setOnClickListener(new Button.OnClickListener(){
