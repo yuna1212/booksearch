@@ -74,6 +74,7 @@ public class CrawlingReviews {
             }
 
             if(reviews.length != 0) {    // 리뷰가 있을 경우
+                all_reviews = null; // 리뷰 저장할 객체 닦아주기
                 for(int i = 0; i < reviews.length; i++) {
                     // 확인용 출력
                     //System.out.println(reviews[i].id + "\t" + reviews[i].date + "\n" + reviews[i].comment + "\n");
