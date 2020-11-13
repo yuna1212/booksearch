@@ -28,10 +28,10 @@ public class CrawlingReviews {
         String url = "http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=" + ISBN + "&orderClick=LEa&Kc=";
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(url); //웹뷰 실행
         webView.setWebChromeClient(new WebChromeClient()); // 웹뷰에 크롬 사용 허용
         webView.setWebViewClient(new WebViewClientClass()); // 새창열기 없이 웹뷰 내에서 다시 열기, 페이지 이동 원활히 하기 위해 사용
         webView.addJavascriptInterface(new WebViewJavascriptInterface(), "Android");
+        webView.loadUrl(url); //웹뷰 실행
     }
 
     // 페이지 이동시 새창으로 안뜨도록
