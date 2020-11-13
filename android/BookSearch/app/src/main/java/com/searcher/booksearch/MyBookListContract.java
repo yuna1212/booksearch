@@ -11,11 +11,15 @@ public final class MyBookListContract {
         public static final String DATABASE_NAME = "booksearch";
         public static final String TABLE_NAME = "my_book_list";
         public static final String COLUMN_ISBN = "ISBN";
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_AUTHOR = "author";
         public static final String COLUMN_MEMO = "memo";
         public static final String COLUMN_ADDDATE = "addDate";
         public static final String SQL_CREATE_TABLE =
                 "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                         COLUMN_ISBN + " TEXT PRIMARY KEY," +
+                        COLUMN_TITLE + " TEXT," +
+                        COLUMN_AUTHOR + " TEXT," +
                         COLUMN_MEMO + " TEXT," +
                         COLUMN_ADDDATE + " TEXT)";
         public static final String SQL_DROP_TABLE =

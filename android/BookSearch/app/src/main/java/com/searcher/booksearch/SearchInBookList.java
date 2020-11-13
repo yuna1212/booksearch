@@ -2,15 +2,16 @@ package com.searcher.booksearch;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,41 +19,47 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.searcher.booksearch.R;
 
-public class MyBookList extends AppCompatActivity {
-
-    public static final int REQUEST_CODE_SEARCH_IN_MY_BOOK_LIST = 106;
-
-    Context context = this;
-    ManageDatabase manageDatabase = new ManageDatabase(this);
+public class SearchInBookList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_book_list_activity);
+        setContentView(R.layout.my_book_list_search);
 
         // 액션바 숨김
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        final RecyclerViewEmptySupport recyclerView = (RecyclerViewEmptySupport) findViewById(R.id.recyclerView2);
+        final Context context = this;
+
+        // 컴포넌트 연결
+        final RecyclerViewEmptySupport recyclerView = (RecyclerViewEmptySupport) findViewById(R.id.recyclerView3);
+        final EditText input = findViewById(R.id.searchTerm);
+        ImageButton button = findViewById(R.id.searchInListButton3);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setEmptyView(findViewById(R.id.noticeEmptyText2));
+        recyclerView.setEmptyView(findViewById(R.id.noticeEmptyText3));
         final MyBookListItemAdapter adapter = new MyBookListItemAdapter();
 
-        // 데이터베이스에 존재하는 데이터들 카드뷰로 출력
-        Cursor cursor = manageDatabase.getAllData();
-        int record_count = cursor.getCount();    // 데이터베이스 내에 있는 데이터의 개수 저장
+        // 검색어 입력하고 엔터키 누를 경우 - 검색 실행
+        input.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
-        // MyBookListItem 객체 생성하여 카드뷰에 설정해준 후 리싸이클러뷰에 add
-        for (int i = 0; i < record_count; i++) {
-            cursor.moveToNext();
-            adapter.addItem(new MyBookListItem(cursor.getString(0), cursor.getString(1)));
-        }
+        input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                searchInList(input, adapter, recyclerView);
+                return true;
+            }
+        });
 
-        cursor.close();
-        recyclerView.setAdapter(adapter);
-
+        // 검색어 입력하고 돋보기 이미지 버튼 클릭할 경우 - 검색 실행
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchInList(input, adapter, recyclerView);
+            }
+        });
 
         // 아이템 클릭했을 경우
         adapter.setOnItemClickListener(new OnMyBookListItemClickListener() {
@@ -128,16 +135,33 @@ public class MyBookList extends AppCompatActivity {
             }
         });
 
-        // 검색 button
-        ImageButton searchInListButton = findViewById(R.id.searchInListButton2);
-        searchInListButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SearchInBookList.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_SEARCH_IN_MY_BOOK_LIST);
+    }
+
+    // 입력받은 조건과 일치하는 항목이 데이터베이스에 존재하는지 확인하고 결과를 리싸이클러뷰에 출력하는 메소드
+    public void searchInList(EditText input, MyBookListItemAdapter adapter, RecyclerViewEmptySupport recyclerView) {
+        // 검색 조건과 일치하는 데이터를 cursor에 저장
+        ManageDatabase manageDatabase = new ManageDatabase(this);
+        Cursor cursor = manageDatabase.searchData(input.getText().toString());   // 입력받은 검색어를 포함하는 데이터 저장
+        int record_count = cursor.getCount();    // 조건에 일치하는 데이터의 개수 저장
+
+        // 조건에 일치하는 데이터가 없을 경우 해당하는 항목이 없다는 텍스트뷰 보여줌
+        if (record_count == 0) {
+            adapter.removeItems();  // clear adapter
+            recyclerView.setAdapter(adapter);
+        }
+
+        // 조건에 일치하는 항목이 있을 경우 리싸이클러뷰에 항목 보여줌
+        else {
+            // MyBookListItem 객체 생성하여 카드뷰에 설정해준 후 리싸이클러뷰에 add
+            adapter.removeItems();  // clear adapter
+
+            for (int i = 0; i < record_count; i++) {
+                cursor.moveToNext();
+                adapter.addItem(new MyBookListItem(cursor.getString(0), cursor.getString(1)));
             }
-        });
+
+            cursor.close();
+            recyclerView.setAdapter(adapter);
+        }
     }
 }
-

@@ -58,11 +58,11 @@ public class ManageDatabase {
     }
 
     // 데이터 삽입
-    public void insertData(String ISBN) {
+    public void insertData(String ISBN, String title, String author) {
         openDatabase(); // 데이터베이스 열기
 
         String sql = "INSERT INTO " + MyBookListContract.MyBookListEntry.TABLE_NAME +
-                " VALUES ('" + ISBN + "' , NULL, datetime('now','+9 hours'))";
+                " VALUES ('" + ISBN + "', '" + title + "', '" + author + "', NULL, datetime('now','+9 hours'))";
 
         database.execSQL(sql);  // 쿼리 실행
         database.close();   // 데이터베이스 닫기
@@ -94,7 +94,7 @@ public class ManageDatabase {
     }
 
     // 모든 행의 ISBN, memo 받아오기 - 최근 날짜순으로
-    public Cursor selectData() {
+    public Cursor getAllData() {
         openDatabase();  // 데이터베이스 열기
 
         String sql = "SELECT ISBN, memo FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME +
@@ -102,6 +102,23 @@ public class ManageDatabase {
 
         Cursor cursor = database.rawQuery(sql);  // 쿼리 실행
         database.close();   // 데이터베이스 닫기
+        Log.d(TAG, "select success");
+
+        return cursor;
+    }
+
+    /// 도서명, 저자에 검색어가 포함되어 있는 행 반환
+    public Cursor searchData(String searchTerm) {
+        openDatabase();  // 데이터베이스 열기
+
+        String sql = "SELECT ISBN, memo FROM " + MyBookListContract.MyBookListEntry.TABLE_NAME +
+                " WHERE title LIKE '%" + searchTerm + "%' OR author LIKE '%" + searchTerm +
+                "%' ORDER BY addDate DESC";
+
+        Cursor cursor = database.rawQuery(sql);  // 쿼리 실행
+        database.close();   // 데이터베이스 닫기
+        Log.d(TAG, "select success");
+
         return cursor;
     }
 
@@ -125,6 +142,7 @@ public class ManageDatabase {
 
         cursor.close();
         database.close();   // 데이터베이스 닫기
+        Log.d(TAG, "check success");
 
         return exist;
     }

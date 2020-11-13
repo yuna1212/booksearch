@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.searcher.booksearch.MyBookList">
+    tools:context="com.searcher.booksearch.SearchInBookList">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,41 +16,32 @@
             android:layout_height="50dp"
             android:background="#768C5E"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="1dp"
-                android:layout_height="35dp"
-                android:layout_weight="25"
-                app:srcCompat="@drawable/book" />
-
-            <TextView
-                android:id="@+id/pageName2"
+            <EditText
+                android:id="@+id/searchTerm"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="25"
-                android:gravity="center_vertical"
-                android:text="내 관심 도서"
+                android:layout_height="wrap_content"
+                android:layout_weight="75"
+                android:ems="10"
+                android:hint=" 도서명 또는 저자로 검색해주세요."
+                android:imeOptions="actionSearch"
+                android:inputType="textPersonName"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="20" />
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp" />
 
             <ImageButton
-                android:id="@+id/searchInListButton2"
+                android:id="@+id/searchInListButton3"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:background="#768C5E"
-                android:padding="11dp"
+                android:padding="7dp"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/searchresult" />
-
         </LinearLayout>
 
         <RelativeLayout
@@ -58,7 +49,7 @@
             android:layout_height="match_parent">
 
             <com.searcher.booksearch.RecyclerViewEmptySupport
-                android:id="@+id/recyclerView2"
+                android:id="@+id/recyclerView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#DFE1D1"
@@ -67,14 +58,16 @@
             </com.searcher.booksearch.RecyclerViewEmptySupport>
 
             <TextView
-                android:id="@+id/noticeEmptyText2"
+                android:id="@+id/noticeEmptyText3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#DFE1D1"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="내 관심 도서가 없습니다.\n관심 도서를 추가해보세요."
-                android:textSize="17sp" />
+                android:text="일치하는 항목이 없습니다."
+                android:textSize="17sp"
+                android:visibility="gone" />
         </RelativeLayout>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
