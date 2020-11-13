@@ -70,14 +70,14 @@ public class MyBookList extends AppCompatActivity {
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // 데이터베이스에서 delete
-                        ManageDatabase manageDatabase = new ManageDatabase(context);
-                        manageDatabase.deleteData(item.getISBN());
-                        Toast.makeText(context, "삭제 완료", Toast.LENGTH_SHORT).show();
-
                         // 리싸이클러뷰에서 삭제
                         adapter.removeItem(recyclerView, position);
                         recyclerView.setAdapter(adapter);
+                        Toast.makeText(context, "삭제 완료", Toast.LENGTH_SHORT).show();
+
+                        // 데이터베이스에서 delete
+                        ManageDatabase manageDatabase = new ManageDatabase(context);
+                        manageDatabase.deleteData(item.getISBN());
                     }
                 });
 
@@ -109,13 +109,13 @@ public class MyBookList extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 String memo = input.getText().toString();
 
-                                // 데이터베이스 update
-                                ManageDatabase manageDatabase = new ManageDatabase(context);
-                                manageDatabase.updateData(ISBN, memo);
-
                                 // 리싸이클러뷰에서 수정
                                 adapter.modifyItem(recyclerView, position, ISBN, memo);
                                 recyclerView.setAdapter(adapter);
+
+                                // 데이터베이스 update
+                                ManageDatabase manageDatabase = new ManageDatabase(context);
+                                manageDatabase.updateData(ISBN, memo);
                             }
                         });
                 builder.setNegativeButton("취소",
