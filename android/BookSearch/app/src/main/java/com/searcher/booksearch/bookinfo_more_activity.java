@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -21,10 +22,10 @@ public class bookinfo_more_activity extends Activity {
         setContentView(R.layout.activity_bookinfo_more_activity);
 
 
-        // 내용 직성
+        // 내용 자성
         Intent intent = getIntent();
         TextView textView = findViewById(R.id.book_detail);
-        textView.setText(intent.getStringExtra("description"));
+        textView.setText(Html.fromHtml(intent.getStringExtra("description"))); // css 적용하여 보여주기
 
         Button close_button = findViewById(R.id.close_button);
         close_button.setOnClickListener(new Button.OnClickListener(){
