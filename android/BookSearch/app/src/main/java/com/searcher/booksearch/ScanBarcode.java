@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import org.searcher.booksearch.R;
 
 import java.util.concurrent.ExecutionException;
@@ -49,7 +50,7 @@ public class ScanBarcode extends AppCompatActivity {
 
         // 내 관심 도서 목록으로 이동하는 button
         Button goToListButton = (Button) findViewById(R.id.goToListButton);
-        goToListButton.setOnClickListener(new View.OnClickListener(){
+        goToListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MyBookList.class); //관심 도서.class연결
@@ -60,7 +61,7 @@ public class ScanBarcode extends AppCompatActivity {
 
         // 내 관심 도서 목록에 해당 도서 추가하는 button
         final Button addToListButton = (Button) findViewById(R.id.addToListButton);
-        addToListButton.setOnClickListener(new View.OnClickListener(){
+        addToListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ManageDatabase manageDatabase = new ManageDatabase(context);
@@ -72,9 +73,7 @@ public class ScanBarcode extends AppCompatActivity {
                     addToListButton.setBackgroundResource(R.drawable.empty_heart);
 
                     Toast.makeText(context, "내 관심 도서 목록에서 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                }
-
-                else {      // 존재하지 않을 경우
+                } else {      // 존재하지 않을 경우
                     manageDatabase.insertData(ISBN, title, author);    // 데이터베이스에 해당 도서 추가
                     // 채워진 하트 설정
                     addToListButton.setBackgroundResource(R.drawable.full_heart);
@@ -89,8 +88,8 @@ public class ScanBarcode extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Button addToListButton = (Button) findViewById(R.id.addToListButton);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {  // 취소 누른 경우 메뉴 선택 페이지로 이동
+        if (result != null) {
+            if (result.getContents() == null) {  // 취소 누른 경우 메뉴 선택 페이지로 이동
                 Intent intent = new Intent(getApplicationContext(), SelectMenu.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -102,13 +101,12 @@ public class ScanBarcode extends AppCompatActivity {
 
                 if (manageDatabase.isDataExist(ISBN)) {     // 존재할 경우, 채워진 하트
                     addToListButton.setBackgroundResource(R.drawable.full_heart);
-                }
-                else {      // 존재하지 않을 경우, 빈 하트
+                } else {      // 존재하지 않을 경우, 빈 하트
                     addToListButton.setBackgroundResource(R.drawable.empty_heart);
                 }
 
                 // 네이버 API 요청, 도서 상세 페이지 쓰기
-               try {
+                try {
                     final BookInformation book = new BookInformation(ISBN); // final로 쓰는게 맞나...
 
                     // 책 정보 작성할 컴포넌트 찾기
@@ -129,42 +127,40 @@ public class ScanBarcode extends AppCompatActivity {
                     book.set_description_on_component(bookIntroContent);
                     book.set_image_on_component(bookCover1);
 
-                   // 내 관심 도서 목록에 추가할 때 데이터베이스에 저장해야 되는 내용들 변수에 저장
-                   title = book.getBookInfo().get("title");
-                   author = book.getBookInfo().get("author");
+                    // 내 관심 도서 목록에 추가할 때 데이터베이스에 저장해야 되는 내용(도서 제목, 저자) 공백 제거하여 변수에 저장
+                    title = book.getBookInfo().get("title").replaceAll("\\p{Z}", "");
+                    author = book.getBookInfo().get("author").replaceAll("\\p{Z}", "");
 
-                   // 책 소개 자세히를 눌렀다면 책 상세 페이지 팝업창 띄우기
-                   // 이렇게 try catch에 다 넣어놔도 되나 모르겠다
-                   TextView bookInfoDetail = findViewById(R.id.bookInfoDetail);
-                   bookInfoDetail.setOnClickListener(new View.OnClickListener(){
-                       @Override
-                       public void onClick(View v) {
-                           // 교보문고 책 상세 설명 크롤링 해옴
-                           GetDetailedDescAsyncTask detail_asynctask = new GetDetailedDescAsyncTask();
-                           String[] detail_info  = null;
-                           try {
-                               detail_info = detail_asynctask.execute("http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=" + ISBN + "&orderClick=LEa&Kc=").get();
-                           } catch (ExecutionException e) {
-                               e.printStackTrace();
-                           } catch (InterruptedException e) {
-                               e.printStackTrace();
-                           }
+                    // 책 소개 자세히를 눌렀다면 책 상세 페이지 팝업창 띄우기
+                    // 이렇게 try catch에 다 넣어놔도 되나 모르겠다
+                    TextView bookInfoDetail = findViewById(R.id.bookInfoDetail);
+                    bookInfoDetail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // 교보문고 책 상세 설명 크롤링 해옴
+                            GetDetailedDescAsyncTask detail_asynctask = new GetDetailedDescAsyncTask();
+                            String[] detail_info = null;
+                            try {
+                                detail_info = detail_asynctask.execute("http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=" + ISBN + "&orderClick=LEa&Kc=").get();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
 
-                           // 상세 설명 인텐트에 넣어서 팝업창에 보내기
-                           Intent intent = new Intent(getApplicationContext(), bookinfo_more_activity.class);
-                           intent.putExtra("detail_title", detail_info[0]); // 첫 문장(제목) 감싸기
-                           intent.putExtra("detail_content", detail_info[1]); // 첫 문장 제외 내용 감싸기
-                           startActivity(intent);
-                       }
-                   });
+                            // 상세 설명 인텐트에 넣어서 팝업창에 보내기
+                            Intent intent = new Intent(getApplicationContext(), bookinfo_more_activity.class);
+                            intent.putExtra("detail_title", detail_info[0]); // 첫 문장(제목) 감싸기
+                            intent.putExtra("detail_content", detail_info[1]); // 첫 문장 제외 내용 감싸기
+                            startActivity(intent);
+                        }
+                    });
 
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
 
 
                 // 리뷰 크롤링

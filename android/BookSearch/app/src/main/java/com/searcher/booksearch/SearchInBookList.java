@@ -34,7 +34,7 @@ public class SearchInBookList extends AppCompatActivity {
 
         // 컴포넌트 연결
         final RecyclerViewEmptySupport recyclerView = (RecyclerViewEmptySupport) findViewById(R.id.recyclerView3);
-        final EditText input = findViewById(R.id.searchTerm);
+        final EditText editText = findViewById(R.id.searchTerm);
         ImageButton button = findViewById(R.id.searchInListButton3);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -43,12 +43,12 @@ public class SearchInBookList extends AppCompatActivity {
         final MyBookListItemAdapter adapter = new MyBookListItemAdapter();
 
         // 검색어 입력하고 엔터키 누를 경우 - 검색 실행
-        input.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
-        input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                searchInList(input, adapter, recyclerView);
+                searchInList(editText, adapter, recyclerView);
                 return true;
             }
         });
@@ -57,7 +57,7 @@ public class SearchInBookList extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchInList(input, adapter, recyclerView);
+                searchInList(editText, adapter, recyclerView);
             }
         });
 
@@ -138,21 +138,30 @@ public class SearchInBookList extends AppCompatActivity {
     }
 
     // 입력받은 조건과 일치하는 항목이 데이터베이스에 존재하는지 확인하고 결과를 리싸이클러뷰에 출력하는 메소드
-    public void searchInList(EditText input, MyBookListItemAdapter adapter, RecyclerViewEmptySupport recyclerView) {
+    public void searchInList(EditText editText, MyBookListItemAdapter adapter, RecyclerViewEmptySupport recyclerView) {
+        // 사용자로부터 입력받은 문자열을 input에 저장
+        String input = editText.getText().toString().replaceAll("\\p{Z}", "");
+
         // 검색 조건과 일치하는 데이터를 cursor에 저장
         ManageDatabase manageDatabase = new ManageDatabase(this);
-        Cursor cursor = manageDatabase.searchData(input.getText().toString());   // 입력받은 검색어를 포함하는 데이터 저장
+        Cursor cursor = manageDatabase.searchData(input);   // 입력받은 검색어를 포함하는 데이터 저장
         int record_count = cursor.getCount();    // 조건에 일치하는 데이터의 개수 저장
 
-        // 조건에 일치하는 데이터가 없을 경우 해당하는 항목이 없다는 텍스트뷰 보여줌
-        if (record_count == 0) {
+        // 사용자가 공백 입력 또는 아무것도 입력하지 않고 검색을 눌렀을 경우 해당하는 항목이 없다는 텍스트뷰 보여줌
+        if(input.getBytes().length <= 0) {
             adapter.removeItems();  // clear adapter
             recyclerView.setAdapter(adapter);
         }
 
-        // 조건에 일치하는 항목이 있을 경우 리싸이클러뷰에 항목 보여줌
+        // 조건에 일치하는 데이터가 없을 경우 해당하는 항목이 없다는 텍스트뷰 보여줌
+        else if (record_count == 0) {
+            adapter.removeItems();  // clear adapter
+            recyclerView.setAdapter(adapter);
+        }
+
+        // 조건에 일치하는 항목이 있을 경우 리싸이클러뷰 사용하여 항목 보여줌
         else {
-            // MyBookListItem 객체 생성하여 카드뷰에 설정해준 후 리싸이클러뷰에 add
+            // MyBookListItem 객체 생성하여 카드뷰에 설정한 후 리싸이클러뷰에 add
             adapter.removeItems();  // clear adapter
 
             for (int i = 0; i < record_count; i++) {
