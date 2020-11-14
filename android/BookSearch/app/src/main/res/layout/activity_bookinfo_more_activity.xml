@@ -2,20 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+
     android:orientation="vertical"
     tools:context="com.searcher.booksearch.bookinfo_more_activity">
 
     <TextView
-        android:id="@+id/book_detail"
-        android:layout_width="wrap_content"
+        android:id="@+id/book_detail_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:scrollbars="vertical"
+        android:text="책 설명 제목" />
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#768C5E"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/book_detail_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:scrollbars="vertical"
         android:text="책 상세 내용" />
 
     <Button
         android:id="@+id/close_button"
+        android:background="#768C5E"
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
+
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:text="닫기" />
 </LinearLayout>
