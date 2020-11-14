@@ -22,10 +22,13 @@ public class bookinfo_more_activity extends Activity {
         setContentView(R.layout.activity_bookinfo_more_activity);
 
 
-        // 내용 자성
+        // 내용 작성
         Intent intent = getIntent();
-        TextView textView = findViewById(R.id.book_detail);
-        textView.setText(Html.fromHtml(intent.getStringExtra("description"))); // css 적용하여 보여주기
+        TextView detail_title = findViewById(R.id.book_detail_title);
+        TextView detail_content = findViewById(R.id.book_detail_content);
+
+        detail_title.setText(intent.getStringExtra("detail_title")); // 첫 문장 set
+        detail_content.setText(intent.getStringExtra("detail_content")); // 내용 set
 
         Button close_button = findViewById(R.id.close_button);
         close_button.setOnClickListener(new Button.OnClickListener(){

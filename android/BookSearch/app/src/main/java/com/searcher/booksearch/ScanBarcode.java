@@ -141,7 +141,7 @@ public class ScanBarcode extends AppCompatActivity {
                        public void onClick(View v) {
                            // 교보문고 책 상세 설명 크롤링 해옴
                            GetDetailedDescAsyncTask detail_asynctask = new GetDetailedDescAsyncTask();
-                           String detail_info  = null;
+                           String[] detail_info  = null;
                            try {
                                detail_info = detail_asynctask.execute("http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=" + ISBN + "&orderClick=LEa&Kc=").get();
                            } catch (ExecutionException e) {
@@ -152,7 +152,8 @@ public class ScanBarcode extends AppCompatActivity {
 
                            // 상세 설명 인텐트에 넣어서 팝업창에 보내기
                            Intent intent = new Intent(getApplicationContext(), bookinfo_more_activity.class);
-                           intent.putExtra("description", detail_info);
+                           intent.putExtra("detail_title", detail_info[0]); // 첫 문장(제목) 감싸기
+                           intent.putExtra("detail_content", detail_info[1]); // 첫 문장 제외 내용 감싸기
                            startActivity(intent);
                        }
                    });
