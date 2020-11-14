@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class GetDetailedDescAsyncTask extends AsyncTask<String, Void, String> {
+public class GetDetailedDescAsyncTask extends AsyncTask<String, Void, String[]> {
     /*
      * 초기 파라메터로 교보문고 책 결과 페이지 웹주소 받음
      * Jsoup을 이용해서 교보문고 페이지 연결
@@ -22,7 +22,7 @@ public class GetDetailedDescAsyncTask extends AsyncTask<String, Void, String> {
      */
     final String TAG = "YUNA_DBG";
     @Override
-    protected String doInBackground(String... url) {
+    protected String[] doInBackground(String... url) {
         String selector_fullContent = "div.box_detail_article"; // 전체 내용 파싱할 태그
         String selector_firstSenetence = "h3.title_detail_basic2"; // 첫번째 문장 가져오기
         Document doc = null;
@@ -37,8 +37,9 @@ public class GetDetailedDescAsyncTask extends AsyncTask<String, Void, String> {
         Elements first_sentence = doc.select(selector_firstSenetence);
 
         // 첫번째 컨텐트씩 가져오면 됨
-        // 첫 문장 의미 강조하기위해 css 적용하여 보내기
-        return "<h4>"+first_sentence.first().text()+"</h4><p>"+full_content.first().text()+"</p>";
+        // 첫번째 원소는 title, 두번째 원소는 content
+        String[] ret = {first_sentence.first().text(), full_content.first().text()};
+        return ret;
     }
 
 }
