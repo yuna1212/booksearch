@@ -27,7 +27,12 @@ public class bookinfo_more_activity extends Activity {
         TextView detail_title = findViewById(R.id.book_detail_title);
         TextView detail_content = findViewById(R.id.book_detail_content);
 
-        detail_title.setText(intent.getStringExtra("detail_title")); // 첫 문장 set
+        String first_sentence = intent.getStringExtra("detail_title");
+        
+        if(first_sentence != null)
+            detail_title.setText(first_sentence); // 첫 문장 set
+        else
+            detail_title.setText("null..");
         detail_content.setText(intent.getStringExtra("detail_content")); // 내용 set
 
         Button close_button = findViewById(R.id.close_button);
