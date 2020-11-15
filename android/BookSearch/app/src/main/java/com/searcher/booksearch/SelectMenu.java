@@ -48,17 +48,5 @@ public class SelectMenu extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_관심도서); //REQUEST_CODE_관심도서
             }
         });
-        
-
-        // 로그아웃 click 로그인 화면으로 되돌아가기
-        TextView logout = (TextView) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(intent, REQUEST_CODE_LOGOUT);
-            }
-        });
     }
 }

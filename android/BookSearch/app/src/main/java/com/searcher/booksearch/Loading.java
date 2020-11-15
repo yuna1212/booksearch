@@ -28,8 +28,8 @@ public class Loading extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent); //로딩끝난 후, Login으로 넘어감
+                Intent intent = new Intent(getApplicationContext(), SelectMenu.class);
+                startActivity(intent); //로딩끝난 후, SelectMenu으로 넘어감
                 finish();
             }
         },2000);

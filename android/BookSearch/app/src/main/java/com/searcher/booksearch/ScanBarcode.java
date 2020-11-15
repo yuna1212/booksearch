@@ -172,7 +172,16 @@ public class ScanBarcode extends AppCompatActivity {
 
             }
         } else {
+            //관심도서목록에서 뒤로 갔을 때, 하트
             super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == 106){
+                ManageDatabase manageDatabase = new ManageDatabase(context);
+                if (manageDatabase.isDataExist(ISBN)) {     // 존재할 경우, 채워진 하트
+                    addToListButton.setBackgroundResource(R.drawable.full_heart);
+                } else {      // 존재하지 않을 경우, 빈 하트
+                    addToListButton.setBackgroundResource(R.drawable.empty_heart);
+                }
+            }
         }
     }
 }

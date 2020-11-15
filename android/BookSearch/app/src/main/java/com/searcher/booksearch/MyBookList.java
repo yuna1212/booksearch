@@ -34,6 +34,8 @@ public class MyBookList extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        setResult(REQUEST_CODE_SEARCH_IN_MY_BOOK_LIST);
+
         final RecyclerViewEmptySupport recyclerView = (RecyclerViewEmptySupport) findViewById(R.id.recyclerView2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -134,10 +136,20 @@ public class MyBookList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SearchInBookList.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_SEARCH_IN_MY_BOOK_LIST);
             }
         });
+    }
+
+    //검색결과에서 삭제(수정)했을 경우, booklist에 결과반영
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 107){
+            finish();
+            startActivity(getIntent());
+        }
     }
 }
 

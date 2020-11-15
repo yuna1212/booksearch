@@ -21,6 +21,8 @@ import org.searcher.booksearch.R;
 
 public class SearchInBookList extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_RESULT_BOOK_LIST = 107;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class SearchInBookList extends AppCompatActivity {
         // 액션바 숨김
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        setResult(REQUEST_CODE_RESULT_BOOK_LIST);
 
         final Context context = this;
 
