@@ -95,7 +95,9 @@ public class SearchInBookList extends AppCompatActivity {
                 // '아니오'를 선택한 경우
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
                     @Override
-                    public void onClick(DialogInterface dialog, int id) { }
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
                 });
 
                 AlertDialog alertDialog = builder.create();
