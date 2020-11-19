@@ -105,37 +105,9 @@ public class SearchInBookList extends AppCompatActivity {
             // 메모 내용 텍스트뷰를 짧게 클릭하는 경우 - 메모 작성
             @Override
             public void onItemClick(MyBookListItemAdapter.ViewHolder holder, View view, final int position) {
-                final MyBookListItem item = adapter.getItem(position);    // 짧게 클릭된 아이템을 item 변수에 저장
-                final String ISBN = item.getISBN();
-
-                // 입력창 뜨도록
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                final EditText input = new EditText(context);
-
-                builder.setTitle("메모");
-                builder.setMessage("메모를 입력해주세요.");
-                builder.setView(input);
-                builder.setPositiveButton("저장",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                String memo = input.getText().toString();
-
-                                // 데이터베이스 update
-                                ManageDatabase manageDatabase = new ManageDatabase(context);
-                                manageDatabase.updateData(ISBN, memo);
-
-                                // 리싸이클러뷰에서 수정
-                                adapter.modifyItem(recyclerView, position, ISBN, memo);
-                                recyclerView.setAdapter(adapter);
-                            }
-                        });
-                builder.setNegativeButton("취소",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                // EditMemoDialog 객체 생성하여 dialog 보이기
+                EditMemoDialog dialog = new EditMemoDialog(context);
+                dialog.callEditMemoDialog(adapter, recyclerView, position);
             }
         });
 
