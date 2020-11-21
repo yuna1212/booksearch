@@ -2,6 +2,7 @@ package com.searcher.booksearch;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,6 +129,22 @@ public class MyBookListItemAdapter extends RecyclerView.Adapter<MyBookListItemAd
                     if (listener != null) {
                         listener.onItemClick(ViewHolder.this, view, position);
                     }
+                }
+            });
+
+            // 제목 영역 짧게 터치
+            title.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Log.d("YUNA_DBG", "onClick: 제목이 터치됨..!");
+
+                }
+            });
+            // 이미지 영역 짧게 터치
+            cover.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Log.d("YUNA_DBG", "onClick: 이미지 영역 터치됨..!");
                 }
             });
         }
