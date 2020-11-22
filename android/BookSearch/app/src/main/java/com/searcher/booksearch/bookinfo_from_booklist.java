@@ -31,8 +31,8 @@ public class bookinfo_from_booklist extends Activity {
 
 
         // 상세설명의 제목 작성할 텍스트뷰
-        TextView title_description = findViewById(R.id.book_detail_title);
-        // 상세설명 작성할 텍스트뷰
+        // TextView title_description = findViewById(R.id.book_detail_title);
+        // 설명 작성할 텍스트뷰
         TextView description = findViewById(R.id.bookIntroContent);
         description.setMovementMethod(new ScrollingMovementMethod());
         // 리뷰 작성할 텍스트뷰
@@ -51,8 +51,8 @@ public class bookinfo_from_booklist extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        title_description.setText(detail_info[0]);
-        description.setText(detail_info[1]);
+        description.setText(detail_info[0]+"\n");
+        description.append(detail_info[1]);
 
 
         // 리뷰 크롤링

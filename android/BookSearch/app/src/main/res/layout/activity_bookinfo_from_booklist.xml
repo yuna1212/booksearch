@@ -12,96 +12,93 @@
     tools:context="com.searcher.booksearch.bookinfo_from_booklist">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="도서 설명"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#768C5E"
+            android:padding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="10dp" />
+
+        <TextView
+            android:id="@+id/bookIntroContent"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+
+            android:paddingTop="10dp"
+            android:layout_marginBottom="20dp"
+
+            android:paddingBottom="1dp"
+            android:scrollbarFadeDuration="0"
+            android:scrollbarStyle="insideInset"
+
+            android:scrollbars="vertical"
+            android:text=""
+            android:textSize="15sp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="0dp">
-
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/book_detail_title"
-                android:layout_width="match_parent"
+                android:id="@+id/bookReviewTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scrollbars="vertical"
-                android:text="책 설명 제목"
+
+
+                android:text="리뷰"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#768C5E"
-                android:padding="10dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="10dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="10dp" />
-
             <TextView
-                android:id="@+id/bookIntroContent"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-
-                android:paddingTop="10dp"
-
-                android:scrollbarFadeDuration="0"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical"
-
-                android:paddingBottom="1dp"
-                android:text=""
-                android:textSize="15sp" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/bookReviewSource"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/bookReviewTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-
-
-                    android:text="리뷰"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/bookReviewSource"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=" (출처 : 교보문고)" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#768C5E"
-                android:padding="10dp" />
-
-            <TextView
-                android:id="@+id/bookReviews"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="1dp"
-                android:text="로딩중..."
-
-                android:scrollbarFadeDuration="0"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical"
-
-                android:textSize="15sp" />
+                android:layout_weight="1"
+                android:text=" (출처 : 교보문고)" />
         </LinearLayout>
 
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#768C5E"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/bookReviews"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="1dp"
+            android:scrollbarFadeDuration="0"
+
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:text="로딩중..."
+
+            android:textSize="15sp" />
+    </LinearLayout>
 
 
     <WebView
