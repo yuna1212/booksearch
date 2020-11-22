@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -47,7 +48,7 @@ public class GetDetailedDescAsyncTask extends AsyncTask<String, Void, String[]> 
 
         // 첫번째 컨텐트씩 가져오면 됨
         // 첫번째 원소는 title, 두번째 원소는 content
-        ret[1] = full_content.first().text();
+        ret[1] = StringEscapeUtils.unescapeJava(full_content.first().text());
         return ret;
     }
 
