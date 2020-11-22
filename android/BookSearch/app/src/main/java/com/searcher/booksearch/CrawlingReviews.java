@@ -87,7 +87,10 @@ public class CrawlingReviews {
             }
 
             textView.setText(all_reviews);  // 텍스트 set
-            textView.setMovementMethod(new ScrollingMovementMethod());  // textView 스크롤 가능하도록
+            textView.invalidate();
+            textView.requestLayout();
+            
+
 
         }
     }

@@ -11,10 +11,7 @@
     android:paddingRight="20dp"
     tools:context="com.searcher.booksearch.bookinfo_from_booklist">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scrollbarStyle="insideInset">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,9 +43,13 @@
             <TextView
                 android:id="@+id/bookIntroContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
 
                 android:paddingTop="10dp"
+
+                android:scrollbarFadeDuration="0"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
 
                 android:paddingBottom="1dp"
                 android:text=""
@@ -64,6 +65,8 @@
                     android:id="@+id/bookReviewTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+
 
                     android:text="리뷰"
                     android:textSize="18sp"
@@ -87,13 +90,17 @@
             <TextView
                 android:id="@+id/bookReviews"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="1dp"
                 android:text="로딩중..."
+
+                android:scrollbarFadeDuration="0"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+
                 android:textSize="15sp" />
         </LinearLayout>
-    </ScrollView>
 
 
 
