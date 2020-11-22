@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -24,7 +26,14 @@ public class bookinfo_from_booklist extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE); // 팝업 타이틀 제거
         setContentView(R.layout.activity_bookinfo_from_booklist);
 
-        Log.d("YUNA_DBG", "onCreate: 북리스트 자바");
+        // 닫기버튼 누르면 끝남
+        Button close_button = findViewById(R.id.close_button);
+        close_button.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // ISBN 꺼내기
         String isbn = getIntent().getStringExtra("isbn");
