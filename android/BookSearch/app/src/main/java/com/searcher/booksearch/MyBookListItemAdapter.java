@@ -96,9 +96,12 @@ public class MyBookListItemAdapter extends RecyclerView.Adapter<MyBookListItemAd
         public TextView price;
         public TextView memo;
 
+        private boolean is_book_description; // 아이템에서 터치이벤트 처리시, 책 정보를 보여주기 위함인지 메모작성 위함인지 구분
+
         public ViewHolder(View itemView, final OnMyBookListItemClickListener listener) {
             super(itemView);
 
+            is_book_description = false;
             cover = (ImageView)itemView.findViewById((R.id.bookCover2));
             title = (TextView)itemView.findViewById(R.id.bookTitle2);
             author = (TextView)itemView.findViewById(R.id.bookAuthor2);
@@ -111,6 +114,7 @@ public class MyBookListItemAdapter extends RecyclerView.Adapter<MyBookListItemAd
             itemView.setOnLongClickListener(new View.OnLongClickListener(){
                 @Override
                 public boolean onLongClick(View view) {
+                    is_book_description = false;
                     int position = getAdapterPosition();
                     if (listener != null) {
                         listener.onItemLongClick(ViewHolder.this, view, position);
@@ -125,6 +129,7 @@ public class MyBookListItemAdapter extends RecyclerView.Adapter<MyBookListItemAd
             getTextView().setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
+                    is_book_description = false;
                     int position = getAdapterPosition();
                     if (listener != null) {
                         listener.onItemClick(ViewHolder.this, view, position);
@@ -136,15 +141,24 @@ public class MyBookListItemAdapter extends RecyclerView.Adapter<MyBookListItemAd
             title.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Log.d("YUNA_DBG", "onClick: 제목이 터치됨..!");
-
+                    is_book_description = true;
+                    Log.d("TAG", "onClick: 제목 터치됨");
+                    int position = getAdapterPosition();
+                    if (listener != null) {
+                        listener.onItemClick(ViewHolder.this, v, position);
+                    }
                 }
             });
             // 이미지 영역 짧게 터치
             cover.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Log.d("YUNA_DBG", "onClick: 이미지 영역 터치됨..!");
+                    is_book_description = true;
+                    Log.d("TAG", "onClick: 이미지 터치됨");
+                    int position = getAdapterPosition();
+                    if (listener != null) {
+                        listener.onItemClick(ViewHolder.this, v, position);
+                    }
                 }
             });
         }
@@ -177,5 +191,9 @@ public class MyBookListItemAdapter extends RecyclerView.Adapter<MyBookListItemAd
         }
 
         public TextView getTextView() { return memo; }  // 메모 텍스트뷰 반환 - 클릭 이벤트 처리 위해
+
+        public boolean is_for_bokDescription(){
+            return is_book_description;
+        }
     }
 }

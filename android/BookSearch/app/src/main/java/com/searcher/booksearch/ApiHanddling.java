@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,6 +109,9 @@ public class ApiHanddling{
                 eventType = xpp.next();
 
             }
+
+            // html형식 기호 정제
+            ret.put("description", StringEscapeUtils.unescapeHtml3(ret.get("description")));
             return ret;
 
         } catch (Exception e) {

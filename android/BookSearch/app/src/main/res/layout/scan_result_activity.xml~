@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DFE1D1"
+    android:scrollbars="vertical"
+    tools:context="com.searcher.booksearch.ScanBarcode">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#768C5E"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/searchIcon"
+                android:layout_width="1dp"
+                android:layout_height="35dp"
+                android:layout_weight="25"
+                app:srcCompat="@drawable/searchresult" />
+
+            <TextView
+                android:id="@+id/pageName1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                android:gravity="center_vertical"
+                android:text="검색 결과"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="50" />
+
+            <WebView
+                android:id="@+id/searchWebsite"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="28dp">
+
+            </WebView>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:scrollbarFadeDuration="0"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/bookTitle1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:padding="1dp"
+                            android:text=""
+                            android:textSize="21sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/bookCover1"
+                                android:layout_width="120dp"
+                                android:layout_height="150dp"
+                                android:layout_marginTop="0dp"
+                                android:padding="5dp"
+                                android:scaleType="fitCenter"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_launcher" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/bookAuthor1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="2dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="저자 : "
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/bookPublisher1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="2dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="출판사 : "
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/bookPublishedDate1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="2dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="출간일 : "
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/bookPrice1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="2dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="가격 : "
+                                    android:textSize="15sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="3dp">
+
+                                    <Space
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="35" />
+
+                                    <Button
+                                        android:id="@+id/goToListButton"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="36dp"
+                                        android:background="@drawable/booklist_button"
+                                        android:text="   내 관심 도서 목록   "
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="13sp" />
+
+                                    <Space
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5" />
+
+                                    <Button
+                                        android:id="@+id/addToListButton"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/heart_drawable" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="0dp">
+
+                        <TextView
+                            android:id="@+id/bookIntroTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="책 소개"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="10dp"
+                            android:background="#768C5E"
+                            android:padding="10dp" />
+
+                        <TextView
+                            android:id="@+id/bookIntroContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:paddingLeft="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="1dp"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/bookInfoDetail"
+                            android:clickable="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:text="자세히"
+                            android:textSize="12sp"
+                            android:layout_marginRight="20dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/bookReviewTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="리뷰"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/bookReviewSource"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text=" (출처 : 교보문고)" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#768C5E"
+                            android:padding="10dp" />
+
+                        <TextView
+                            android:id="@+id/bookReviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:paddingLeft="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="1dp"
+
+                            android:scrollbarFadeDuration="0"
+                            android:scrollbarStyle="insideInset"
+                            android:scrollbars="vertical"
+
+                            android:text="로딩중..."
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

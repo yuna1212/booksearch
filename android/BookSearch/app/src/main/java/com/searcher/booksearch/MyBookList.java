@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,10 +99,27 @@ public class MyBookList extends AppCompatActivity {
             // 메모 내용 텍스트뷰를 짧게 클릭하는 경우 - 메모 작성
             @Override
             public void onItemClick(MyBookListItemAdapter.ViewHolder holder, View view, final int position) {
-                // EditMemoDialog 객체 생성하여 dialog 보이기
-                EditMemoDialog dialog = new EditMemoDialog(context);
-                dialog.callEditMemoDialog(adapter, recyclerView, position);
+                // 책 자세한 정보를 띄워줘야 함
+                if (holder.is_for_bokDescription()){
+                    //  인텐트에 넣어서 팝업창에 보내기
+                    Log.d("TAG", "onItemClick: hello");
+                    Log.d("TAG", "onItemClick: +isbn은 "+adapter.getItem(position).getISBN());
+
+                    Intent intent = new Intent(getApplicationContext(), bookinfo_from_booklist.class);
+                    intent.putExtra("isbn", adapter.getItem(position).getISBN()); // ISBN 보내기
+                    startActivity(intent);
+
+
+                }
+
+                // 메모 작성 실행해야 함
+                else {
+                    // EditMemoDialog 객체 생성하여 dialog 보이기
+                    EditMemoDialog dialog = new EditMemoDialog(context);
+                    dialog.callEditMemoDialog(adapter, recyclerView, position);
+                }
             }
+
         });
 
         // 검색 button
