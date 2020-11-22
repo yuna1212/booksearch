@@ -29,16 +29,10 @@
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"
                 android:text="책 설명 제목"
+                android:layout_marginBottom="15dp"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="#768C5E" />
 
             <TextView
                 android:id="@+id/book_detail_content"
