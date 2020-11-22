@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="도서 설명"
+            android:text="책 소개"
             android:textSize="18sp"
             android:textStyle="bold" />
 
