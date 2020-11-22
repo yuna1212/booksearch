@@ -1,6 +1,9 @@
 package com.searcher.booksearch;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +26,29 @@ public class SelectMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selectmenu_activity);
 
+        // 네트워크 연결상태 확인
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        if (!(connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected())) {
+            new AlertDialog.Builder(this)
+                    .setMessage("인터넷과 연결되어 있지 않습니다.")
+                    .setCancelable(false)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishAffinity();
+                        }
+                    }).show();
+        }
+
+
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
         // 바코드로 도서 검색 button
         Button searchButton = (Button) findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(new View.OnClickListener(){
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ScanBarcode.class); //관심 도서.class연결
@@ -40,7 +60,7 @@ public class SelectMenu extends AppCompatActivity {
 
         // 내 관심 도서 button
         Button myLibButton = (Button) findViewById(R.id.myLibButton);
-        myLibButton.setOnClickListener(new View.OnClickListener(){
+        myLibButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MyBookList.class); //관심 도서.class연결
