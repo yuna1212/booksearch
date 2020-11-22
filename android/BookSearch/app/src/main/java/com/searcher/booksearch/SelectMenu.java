@@ -31,7 +31,7 @@ public class SelectMenu extends AppCompatActivity {
         assert connectivityManager != null;
         if (!(connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected())) {
             new AlertDialog.Builder(this)
-                    .setMessage("인터넷과 연결되어 있지 않습니다.")
+                    .setMessage("네트워크 상태가 불안정합니다. 셀룰러 데이터 또는 Wi-fi 연결 후 사용해 주세요.")
                     .setCancelable(false)
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
