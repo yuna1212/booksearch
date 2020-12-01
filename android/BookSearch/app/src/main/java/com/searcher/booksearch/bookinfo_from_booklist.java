@@ -60,7 +60,11 @@ public class bookinfo_from_booklist extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        description.setText(detail_info[0]+"\n");
+
+        if(detail_info[0].equals("")); // 굵은 내용의 제목이 없으면 set하지 않음
+        else
+            description.setText(detail_info[0]+"\n");
+
         description.append(detail_info[1]);
 
 

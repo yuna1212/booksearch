@@ -41,7 +41,7 @@ public class GetDetailedDescAsyncTask extends AsyncTask<String, Void, String[]> 
         String ret[] = new String[2]; // return할 값 저장하는 변수
         // 첫번째 문장이 웹페이지에 있는지 검사
         if(first_sentence == null || first_sentence.isEmpty()) {
-            ret[0] = null; // 첫 문장을 강조하는 내용이 웹문서에 없을시 null 전달
+            ret[0] = ""; // 첫 문장을 강조하는 내용이 웹문서에 없을시 빈 문자열 전달
         }else{
             ret[0] = first_sentence.first().text();
         }
